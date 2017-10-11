@@ -12,19 +12,19 @@ import android.support.v7.app.AlertDialog;
 
 public class Alert extends DialogFragment{
 
-    private static String hintMessage;
+    private static String message;
 
     public Alert() {
     }
 
     public static void passMessage(String msg){
-        hintMessage = msg;
+        message = msg;
     }
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(hintMessage)
+        builder.setMessage(message)
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();

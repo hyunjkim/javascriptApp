@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         String aQuestion = questions.questions();
-        System.out.println("line 32" +  aQuestion);
+        String displayedQuestion = questionTv.getText().toString();
+
         switch(v.getId()){
             case R.id.randomBtn:
                 Toast.makeText(getApplicationContext(),"QUESTION!!",Toast.LENGTH_LONG).show();
@@ -49,26 +50,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.hintBtn:
                 Toast.makeText(getApplicationContext(),"DON'T WORK", Toast.LENGTH_LONG).show();
+                answerDialog(displayedQuestion,"hint");
                 break;
             case R.id.giveupBtn:
-                answerDialog(aQuestion);
+                System.out.println("LINE54 - DISPLAYED QUESTIONS" + displayedQuestion);
+                answerDialog(displayedQuestion,"answer");
                 break;
         }
     }
 
-    public void answerDialog(String theQuestion) {
+    public void answerDialog(String theQuestion, String display) {
         Alert alert = new Alert();
-        String answer = getAnswer(theQuestion);
-        System.out.println("LINE62" + answer);
-        alert.passMessage(answer);
         DialogFragment newFragment = new Alert();
-        System.out.println("LINE65" + answer);
+        String answer;
+        String hint;
+
+        if(display == "answer") {
+            answer = getAnswer(theQuestion);
+            alert.passMessage(answer);
+        } else {
+            hint = questions.getHint(theQuestion);
+            alert.passMessage(hint);
+        }
         newFragment.show(getSupportFragmentManager(), "Question");
     }
 
     private String getAnswer(String theQuestion) {
-        String answer = questions.getAnswer(theQuestion);
-        System.out.println("line 71 - main - answer" +  answer);
-        return answer;
+        return questions.getAnswer(theQuestion);
     }
 }
