@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Java_Script</string>
+    <string name="empty">--</string>
+    <string name="random">Random</string>
+    <string name="giveup">GiveUp</string>
+    <string name="hint">hint</string>
+</resources>
