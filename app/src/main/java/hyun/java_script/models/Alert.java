@@ -12,12 +12,12 @@ import android.support.v7.app.AlertDialog;
 
 public class Alert extends DialogFragment{
 
-    private static String message;
+    private String message;
 
     public Alert() {
     }
 
-    public static void passMessage(String msg){
+    public void passMessage(String msg){
         message = msg;
     }
     @Override

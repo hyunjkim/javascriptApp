@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         giveUpBtn.setOnClickListener(this);
     }
 
+    // TODO: USER SHOULD ACCESS TO HINTS (3) TIMES A DAY?
+
     @Override
     public void onClick(View v) {
         String aQuestion = questions.questions();
@@ -45,15 +47,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch(v.getId()){
             case R.id.randomBtn:
-                Toast.makeText(getApplicationContext(),"QUESTION!!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"QUESTION!!",Toast.LENGTH_SHORT).show();
                 questionTv.setText(aQuestion);
                 break;
             case R.id.hintBtn:
-                Toast.makeText(getApplicationContext(),"DON'T WORK", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"HINT", Toast.LENGTH_SHORT).show();
                 answerDialog(displayedQuestion,"hint");
                 break;
             case R.id.giveupBtn:
-                System.out.println("LINE54 - DISPLAYED QUESTIONS" + displayedQuestion);
+                Toast.makeText(getApplicationContext(),"GIVE UP", Toast.LENGTH_SHORT).show();
                 answerDialog(displayedQuestion,"answer");
                 break;
         }
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String answer;
         String hint;
 
-        if(display == "answer") {
+        if(display.equals("answer")) {
             answer = getAnswer(theQuestion);
             alert.passMessage(answer);
         } else {
@@ -75,7 +77,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         newFragment.show(getSupportFragmentManager(), "Question");
     }
 
-    private String getAnswer(String theQuestion) {
-        return questions.getAnswer(theQuestion);
-    }
+    private String getAnswer(String theQuestion) {return questions.getAnswer(theQuestion);}
 }

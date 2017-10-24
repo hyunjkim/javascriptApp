@@ -1,7 +1,5 @@
 package hyun.java_script.models;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,40 +11,18 @@ import java.util.Random;
 
 public class Questions {
 
-    private static List <String> questionList = new ArrayList<>(
-            Arrays.asList(
-                    "Can you name two programming paradigms important for JavaScript app developers?",
-                    "What is functional programming?",
-                    "What is the difference between classical inheritance and prototypal inheritance?",
-                    "What is JavaScript?",
-                    "What are the the primitive datatypes?",
-                    "Difference between function overloading and overriding.",
-                    "Space complexity and best time complexity of the merge sort.",
-                    "Name 3 methods that enable us to manipulate the context of the keyword 'this'"
-                    )
-    );
-    private static List <String> answerList = new ArrayList<>(
-            Arrays.asList(
-                    "Prototypal inheritance (also: prototypes, OLOO) or Functional programming (also: closures, first class functions, lambdas)",
-                    "Pure functions/Haskell/first-class functions, higher order functions, functions as arguments/values",
-                    "In JavaScript, prototypal inheritance is simpler & more flexible than class inheritance.",
-                    "JavaScript is a programming language that is run by most modern browsers",
-                    "Boolean, Null, Undefined, Number, String, Symbol",
-                    "Overloading: Same function name, but different signature(s). Overriding: Same function name and signature(s), but different function definition.",
-                    "Both are O(nlog(n))",
-                    "Bind, call, and apply"
-                    )
-    );
-    private static Map<String,String> questionMap = new HashMap<>();
-    private static Random random = new Random();
-    private static String answer = "" ;
+    private Map<String,String> questionMap = new HashMap<>();
+    private Random random = new Random();
+    private List <String> questionList = QuestionBank.getQuestionList();
+    private List <String> answerList = QuestionBank.getAnswerList();
+    private String answer = "";
 
 
     public Questions(){
 
     }
 
-    public static String questions(){
+    public String questions(){
         int len = questionList.size();
         int index = random.nextInt(len);
         String theQuestion = questionList.get(index);
@@ -57,7 +33,7 @@ public class Questions {
         return theQuestion;
     }
 
-    public static String getAnswer(String theQuestion) {
+    public String getAnswer(String theQuestion) {
 
         for(String key : questionMap.keySet()) {
             if(key.equals(theQuestion)) {
@@ -71,12 +47,13 @@ public class Questions {
    public String getHint(String question) {
         String mAnswer = getAnswer(question);
         String[] split = mAnswer.split(" ");
-        StringBuffer mHint = new StringBuffer();
+        StringBuilder mHint = new StringBuilder();
+
         if(split.length > 4) {
            for(int i = 0 ; i < 4 ; i++){
-               mHint.append(split[i] + " ");
+               mHint.append(split[i]).append(" ");
            }
         }
-        return (mHint.length()<=0)? "No Hint" : mHint.toString();
+        return (mHint.length() <= 0)? "No Hint" : mHint.toString();
     }
 }
